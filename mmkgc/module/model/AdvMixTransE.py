@@ -141,6 +141,7 @@ class AdvMixTransE(Model):
         return [score_h, score_t, score_all], [h_img_emb, t_img_emb, h_text_emb, t_text_emb]
 
     def predict(self, data):
+        score = self.forward(data)
         if self.margin_flag:
             score=self.margin- score
             return score.cpu().data.numpy()
