@@ -18,7 +18,7 @@ if __name__ == "__main__":
     torch.cuda.manual_seed_all(args.seed)
     # dataloader for training
     train_dataloader = TrainDataLoader(
-        in_path="./benchmarks/" + args.dataset + '/',
+        in_path="/content/AdaMF-MAT/benchmarks/" + args.dataset + '/',
         batch_size=args.batch_size,
         threads=8,
         sampling_mode="normal",
@@ -29,9 +29,9 @@ if __name__ == "__main__":
     )
     # dataloader for test
     test_dataloader = TestDataLoader(
-        "./benchmarks/" + args.dataset + '/', "link")
-    img_emb = torch.load('./embeddings/' + args.dataset + '-visual.pth')
-    text_emb = torch.load('./embeddings/' + args.dataset + '-textual.pth')
+        "/content/AdaMF-MAT/benchmarks/" + args.dataset + '/', "link")
+    img_emb = torch.load('/content/AdaMF-MAT/embeddings/' + args.dataset + '-visual.pth')
+    text_emb = torch.load('/content/AdaMF-MAT/embeddings/' + args.dataset + '-textual.pth')
     # define the model
     kge_score = AdvMixRotatE(
         ent_tot=train_dataloader.get_ent_tot(),
