@@ -154,3 +154,43 @@ class Tester(object):
                 total_current += 1.0
 
         return acc, threshlod
+
+    def run_triple_classification_four_metrics(self, threshlod = None):
+        self.lib.initTest()
+        self.data_loader.set_sampling_mode('classification')
+        score = []
+        ans = []
+        training_range = tqdm(self.data_loader)
+        for index, [pos_ins, neg_ins] in enumerate(training_range):
+            res_pos = self.test_one_step(pos_ins)
+            ans = ans + [1 for i in range(len(res_pos))]
+            score.append(res_pos)
+
+            res_neg = self.test_one_step(neg_ins)
+            ans = ans + [0 for i in range(len(res_pos))]
+            score.append(res_neg)
+
+        score = np.concatenate(score, axis = -1)
+        ans = np.array(ans)
+
+        if threshlod == None:
+            threshlod, _ = self.get_best_threshlod(score, ans)
+        tp = 0.0
+        fn = 0.0
+        fp = 0.0
+        tn = 0.0
+        for i in range(score.shape[0]):
+            if score[i] < threshlod and ans[i] == 1:
+                tp += 1
+            elif score[i] >= threshlod and ans[i] == 1:
+                fn += 1
+            elif score[i] < threshlod and ans[i] == 0:
+                fp += 1
+            else:
+                tn += 1
+        print(tp, tn, fn, fp)
+        acc = (tp + tn) / (tp + tn + fn + fp)
+        precision = tp / (tp + fp)
+        recall = tp / (tp + fn)
+        f1_score = (2 * precision * recall) / (precision + recall)
+        return acc, precision, recall, f1_score, threshlod
