@@ -3,11 +3,11 @@ import argparse
 
 def get_args():
     arg = argparse.ArgumentParser()
-    arg.add_argument('-dataset', type=str, default='FB15K')
+    arg.add_argument('-dataset', type=str, default='DB15K')
     arg.add_argument('-batch_size', type=int, default=1024)
     arg.add_argument('-margin', type=float, default=6.0)
     arg.add_argument('-dim', type=int, default=128)
-    arg.add_argument('-epoch', type=int, default=1000)
+    arg.add_argument('-epoch', type=int, default=100)
     arg.add_argument('-save', type=str)
     arg.add_argument('-img_dim', type=int, default=4096)
     arg.add_argument('-neg_num', type=int, default=1)
