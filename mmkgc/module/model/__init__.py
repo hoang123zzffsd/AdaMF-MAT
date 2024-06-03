@@ -13,6 +13,7 @@ from .TBKGC import TBKGC
 from .AdvMixRotatE import AdvMixRotatE
 from .TransAE import TransAE
 from .MMKRL import MMKRL
+from .AdvMixTransE import AdvMixTransE
 
 __all__ = [
     'Model',
