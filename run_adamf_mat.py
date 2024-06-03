@@ -75,3 +75,5 @@ if __name__ == "__main__":
     kge_score.load_checkpoint(args.save)
     tester = Tester(model=kge_score, data_loader=test_dataloader, use_gpu=True)
     tester.run_link_prediction(type_constrain=False)
+    acc, p, r, f, _ = tester.run_triple_classification_four_metrics()
+    print(acc, p, r, f)
