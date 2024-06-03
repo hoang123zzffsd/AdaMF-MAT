@@ -58,8 +58,8 @@ if __name__ == "__main__":
     
     adv_generator = MultiGenerator(
         noise_dim=64,
-        structure_dim=2*args.dim,
-        img_dim=2*args.dim
+        structure_dim=args.dim,
+        img_dim=args.dim
     )
     # train the model
     trainer = AdvMixTrainer(
