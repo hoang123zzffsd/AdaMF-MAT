@@ -25,5 +25,6 @@ __all__ = [
     'EnsembleComplEx',
     'AdvMixRotatE',
     'TransAE',
-    'MMKRL'
+    'MMKRL',
+    'AdvMixTransE'
 ]
